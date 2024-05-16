@@ -20,7 +20,7 @@ public class TC01 {
         // 1. Launch browser
         // 2. Navigate to url 'http://automationexercise.com'
         Driver.getDriver().get(ConfigReader.getProperty("automationExercise"));
-        ReusableMethods.cookies();
+        ReusableMethods.cookies(aep.cookies);
 
         // 3. Verify that home page is visible successfully
         Assert.assertEquals("https://automationexercise.com/",Driver.getDriver().getCurrentUrl());
@@ -89,6 +89,8 @@ public class TC01 {
         Assert.assertTrue(aep.accountDeleteText.isDisplayed());
 
         aep.continueButton.click();
+
+        Driver.closeDriver();
 
     }
 }
