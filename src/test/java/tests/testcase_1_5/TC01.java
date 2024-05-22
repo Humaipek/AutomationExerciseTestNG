@@ -1,5 +1,8 @@
 package tests.testcase_1_5;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -11,25 +14,28 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+
 public class TC01 {
     AutomationExercisePage aep=new AutomationExercisePage();
     Faker faker=new Faker();
     @Test
     void RegisterUser() {
 
+        ReusableMethods.createExtentReport("RegisterUser");
         // 1. Launch browser
         // 2. Navigate to url 'http://automationexercise.com'
         Driver.getDriver().get(ConfigReader.getProperty("automationExercise"));
-        ReusableMethods.cookies(aep.cookies);
+
 
         // 3. Verify that home page is visible successfully
-        Assert.assertEquals("https://automationexercise.com/",Driver.getDriver().getCurrentUrl());
+        Assert.assertEquals("https://automationexercise.com/",Driver.getDriver().getCurrentUrl(),"That home page is not visible successfully");
+
 
         // 4. Click on 'Signup / Login' button
         aep.signupLogin.click();
 
         // 5. Verify 'New User Signup!' is visible
-        Assert.assertTrue(aep.newUserSignuppText.isDisplayed());
+        Assert.assertTrue(aep.newUserSignuppText.isDisplayed(),"'New User Signup!' is not visible");
 
         // 6. Enter name and email address
         aep.signupName.sendKeys(faker.name().firstName(), Keys.TAB,
@@ -40,7 +46,7 @@ public class TC01 {
 
         // 8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
 
-        Assert.assertTrue(aep.enterAccount.isDisplayed());
+        Assert.assertTrue(aep.enterAccount.isDisplayed(),"That 'ENTER ACCOUNT INFORMATION' is not visible");
 
         // 9. Fill details: Title, Name, Email, Password, Date of birth
         aep.gender.click();
@@ -74,19 +80,19 @@ public class TC01 {
         aep.createAccountButton.click();
 
         // 14. Verify that 'ACCOUNT CREATED!' is visible
-        Assert.assertTrue(aep.accountCreatedText.isDisplayed());
+        Assert.assertTrue(aep.accountCreatedText.isDisplayed(),"That 'ACCOUNT CREATED!' is not visible");
 
         // 15. Click 'Continue' button
         aep.continueButton.click();
 
         // 16. Verify that 'Logged in as username' is visible
-        Assert.assertTrue(aep.loggedText.isDisplayed());
+        Assert.assertTrue(aep.loggedText.isDisplayed(),"That 'Logged in as username' is not visible");
 
         // 17. Click 'Delete Account' button
         aep.deleteButton.click();
 
         // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-        Assert.assertTrue(aep.accountDeleteText.isDisplayed());
+        Assert.assertTrue(aep.accountDeleteText.isDisplayed(),"That 'ACCOUNT DELETED!' is not visible");
 
         aep.continueButton.click();
 
